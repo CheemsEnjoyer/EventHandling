@@ -30,8 +30,9 @@ namespace EventHandling
             marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0);
             goal = new Goal(pbMain.Width / 2, pbMain.Height / 2, 0);
             goal1 = new Goal(pbMain.Width / 2, pbMain.Height / 2, 0);
-            goal.TimerEnded += HandleTimerEnd;
-            goal1.TimerEnded += HandleTimerEnd;
+
+            goal.TimerEnded += () => HandleTimerEnd(goal);
+            goal1.TimerEnded += () => HandleTimerEnd(goal1);
             objects.Add(marker);
             objects.Add(player);
             objects.Add(goal);
@@ -136,7 +137,7 @@ namespace EventHandling
             pbMain.Invalidate();
         }
 
-        private void HandleTimerEnd()
+        private void HandleTimerEnd(Goal goal)
         {
             goal.X = random.Next(0, 300);
             goal.Y = random.Next(0, 300);

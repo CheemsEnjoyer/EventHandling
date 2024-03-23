@@ -81,7 +81,6 @@ namespace EventHandling.objects
             currentTime--;
             if (currentTime <= 0)
             {
-                // Если время истекло, переместите Goal и сгенерируйте событие
                 ResetTimer();
                 TimerEnded?.Invoke();
             }
@@ -93,10 +92,6 @@ namespace EventHandling.objects
             currentTime = timerDuration;
             this.X = random.Next(0, 300);
             this.Y = random.Next(0, 300);
-        }
-        public void SetTimerTextLocation(PointF location)
-        {
-            timerTextLocation = location;
         }
     }
 }
