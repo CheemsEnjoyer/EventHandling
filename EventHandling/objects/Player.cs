@@ -5,13 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using static System.Formats.Asn1.AsnWriter;
 namespace EventHandling.objects
 {
     internal class Player : BaseObject
     {
-        public Action<int> OnGoalOverlap;
-        public int score = 0;
+
         public Player(float x, float y, float angle) : base(x, y, angle)
         {
 
@@ -46,10 +44,7 @@ namespace EventHandling.objects
             {
                 OnMarkerOverlap(obj as Marker);
             }
-            if (obj is Goal)
-            {
-                score++;
-            }
+
         }
     }
 }

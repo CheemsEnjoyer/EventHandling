@@ -1,6 +1,5 @@
 using EventHandling.objects;
 using System;
-using static System.Formats.Asn1.AsnWriter;
 namespace EventHandling
 {
     public partial class Form1 : Form
@@ -12,6 +11,7 @@ namespace EventHandling
         Goal goal1;
         Marker marker;
         private Random random = new Random();
+        private int score = 0;
         public Form1()
         {
             InitializeComponent();
@@ -33,6 +33,8 @@ namespace EventHandling
 
             goal.TimerEnded += () => HandleTimerEnd(goal);
             goal1.TimerEnded += () => HandleTimerEnd(goal1);
+
+
             objects.Add(marker);
             objects.Add(player);
             objects.Add(goal);
@@ -54,6 +56,10 @@ namespace EventHandling
                 {
                     player.Overlap(obj);
                     obj.Overlap(player);
+                    if (obj is Goal)
+                    {
+                        IncreaseScore();
+                    }
                 }
             }
 
@@ -126,8 +132,13 @@ namespace EventHandling
 
         private void UpdateScoreDisplay()
         {
-            int score = player.score; 
             lblScope.Text = $"Очки: {score}";
+        }
+
+        private void IncreaseScore()
+        {
+            score++;
+            UpdateScoreDisplay();
         }
 
         private void TimerTick(object sender, EventArgs e)
